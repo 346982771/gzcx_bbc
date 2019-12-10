@@ -29,11 +29,11 @@ class NewsController extends BaseController
 //                return api_error('缺少参数!');
 //            }
         $news_data = [
-            'title' => is_empty(isset($data['title']) ? $data['title'] : ''),
-            'content' => is_empty(isset($data['content']) ? $data['content'] : ''),
-            'cover_url' => is_empty(isset($data['cover_url']) ? $data['cover_url'] : ''),
+            'title' => $data['title'] ?? '',
+            'content' => $data['content'] ?? '',
+            'cover_url' => $data['cover_url'] ?? '',
             'create_time' => time(),
-            'is_draft' => is_one(isset($data['is_draft']) ? $data['is_draft'] : 0),
+            'is_draft' => is_one($data['is_draft'] ?? 0),
             'publisher_id' => $this->user['id']
         ];
         $draft_news_id = is_empty(isset($data['draft_news_id']) ? $data['draft_news_id'] : '');
@@ -80,7 +80,7 @@ class NewsController extends BaseController
         }
         $data = $this->Request->post();
         $where = 'publisher_id = ' . $this->user['id'] . ' and is_admin = 0 and hide = 0';
-        if(is_one(isset($data['is_draft']) ? $data['is_draft'] : 0)){
+        if(is_one($data['is_draft'] ?? 0)){
             $where .= ' and is_draft = 1';
         }
         $news = $this->ClassModel->getList($where);
@@ -98,7 +98,7 @@ class NewsController extends BaseController
         }
         $this->ClassModel->fieldIncrement('id = '.$data['id'],'visited_num',rand(5, 15));
         $where = 'id = '.$data['id'].' and hide = 0';
-        if(is_one(isset($data['is_draft']) ? $data['is_draft'] : 0)){
+        if(is_one($data['is_draft'] ?? 0)){
             $where .= ' and is_draft = 1';
         }
 

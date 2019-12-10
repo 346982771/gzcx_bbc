@@ -23,7 +23,7 @@ class CommonController extends BaseController
         $data = $this->Request->post();
         $appid = config('common.appid');
         $app_secret = config('common.appSecret');
-        $js_code = is_empty($data['code']);
+        $js_code = $data['code'] ?? '';
         if (!$js_code) {
             return api_error('code不能为空');
         }
@@ -47,7 +47,7 @@ class CommonController extends BaseController
 //        $car_brand_model->add($data);
 //        echo '品牌添加成功！';die;
 
-        echo 123;die
+        echo 123;die;
         $res = get_curl('http://testapi.che300.com/service/getCarBrandList?token=318fe0b7bf890749ec0e4d54907535da');
         dd($res);die;
         $res = $res['brand_list'];

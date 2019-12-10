@@ -54,15 +54,12 @@ if(!function_exists('admin_auth')) {
         $arr = array();
         $rulesArr = explode(',', $rules);
         foreach ($cate as $v) {
-
             if ($v['pid'] == $pid) {
                 if (in_array($v['id'], $rulesArr)) {
                     $v['checked'] = true;
                 }
-
                 $v['open'] = true;
                 $arr[] = $v;
-
                 $arr = array_merge($arr, admin_auth($cate, $v['id'], $rules));
             }
         }
@@ -181,7 +178,7 @@ if(!function_exists('is_empty')) {
 if(!function_exists('is_one')) {
     function is_one($data)
     {
-        return (isset($data) && $data == 1) ? 1 : 0;
+        return intval($data == 1) ? 1 : 0;
     }
 }
 //判断值是否set
