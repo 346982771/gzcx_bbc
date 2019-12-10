@@ -20,7 +20,7 @@ class CarParamOptionModel extends ModelFactory
 
     public function getAll($where = '1 = 1')
     {
-        $res = $this->whereRaw($where)->orderBy('sort','asc','id','asc')->get()->toArray();
+        $res = $this->whereRaw($where)->orderBy('sort','asc')->orderBy('id','asc')->get()->toArray();
         return $res;
     }
     public function getList($where = '')

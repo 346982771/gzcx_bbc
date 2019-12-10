@@ -73,6 +73,7 @@ class CommentController extends ControllerFactory
     {
         $id = $this->Request->post('id');
         $hide = $this->Request->post('hide');
+
         //$res = $this->ClassModel->editStatus('id = '.$id.' or pid = '.$id,['hide' => $hide]);
         $res = $this->ClassModel->editStatus('id = '.$id,['hide' => $hide]);
         if ($res) {

@@ -30,7 +30,7 @@ class CommentModel extends ModelFactory
     public function getAll($where = '1 = 1')
     {
         $res = $this->whereRaw($where)
-            ->orderBy('hide','asc','sort','asc')->get()->toArray();
+            ->orderBy('hide','asc')->orderBy('sort','asc')->get()->toArray();
         return $res;
     }
     public function getList($where = '')

@@ -44,11 +44,20 @@
         <div class="layui-form-item">
             <label class="layui-form-label">用户</label>
             <div class="layui-input-block">
-                <select name="publisher_id" lay-verify="required">
+                <select name="publisher_id" lay-verify="required" lay-search="">
+                        <option value="">直接选择或搜索选择</option>
                     @foreach($user_list as $v)
                         <option value="{{$v['id']}}">{{$v['username']}}</option>
                     @endforeach
                 </select>
+                {{--<select id="brand" name="brand" lay-verify="required" lay-filter="brand" lay-search="">--}}
+                    {{--<option value="">直接选择或搜索选择</option>--}}
+                    {{--@if(!empty($brand))--}}
+                        {{--@foreach($brand as $brands)--}}
+                            {{--<option value="{{$brands['id']}}" @if(isset($info1) && $info1['brand'] == $brands['id']) selected @endif>{{$brands['ltitle']}}</option>--}}
+                        {{--@endforeach--}}
+                    {{--@endif--}}
+                {{--</select>--}}
             </div>
         </div>
         <div class="layui-form-item">

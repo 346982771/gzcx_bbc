@@ -40,14 +40,7 @@ class NewsController extends ControllerFactory
                 $list['data'][$k]['create_time'] = date('Y-m-d H:i:s', $v['create_time']);
                 $list['data'][$k]['username'] = $v['user_info']['username'];
                 $list['data'][$k]['headImg'] = $v['user_info']['headImg'];
-//                if(!empty($v['news_topic'])){
-//                    foreach($list['data'][$k]['news_topic'] as $news_topic_k => $news_topic_v){
-//                        if(!empty($news_topic_v['news']['news_topic_name'])){
-//                            $list['data'][$k]['topic_name'] .= $news_topic_v['news']['news_topic_name'];
-//                            $list['data'][$k]['topic_name'] .= ((count($list['data'][$k]['news_topic']) - 1) == $news_topic_k) ? '' : ',';
-//                        }
-//                    }
-//                }
+
                 unset($list['data'][$k]['news_topic']);
             }
             return $result = ['code' => 0, 'msg' => '获取成功!', 'data' => $list['data'], 'count' => $list['total']];
@@ -77,9 +70,9 @@ class NewsController extends ControllerFactory
         if($this->Request->isMethod('post')){
             $data = $this->Request->post();
 
-//            if(!isset($data['cover_url']) || empty($data['cover_url'])){
-//                return r_result(0,'封面必须上传！');
-//            }
+            if(!isset($data['cover_url']) || empty($data['cover_url'])){
+                return r_result(0,'封面必须上传！');
+            }
             $news_data = [
                 'title' => $data['title'],
                 'content' => $data['content'],
@@ -202,23 +195,7 @@ class NewsController extends ControllerFactory
             return view('admin.news.form',['title' => '添加信息','info' => $info,'user_list' => $user_list,'signature' => $signature]);
         }
     }
-//    public function edit()
-//    {
-//        if($this->Request->isMethod('post')){
-//            $data = $this->Request->post();
-//            $where = 'id = '.$data['id'];
-//            unset($data['file']);
-//            $res = $this->ClassModel->edit($where,$data);
-//
-//            return r_result(1,'',url('admin/News/index'));
-//        }else{
-//            $id = $this->Request->get('id');
-//
-//            $info = $this->ClassModel->queryOne(['id' => $id]);
-//            $p_list = $this->getP0();
-//            return view('admin.news.form',['title' => '修改信息','info' => json_encode($info),'info1' => $info,'p_list' => $p_list]);
-//        }
-//    }
+
     //设置隐藏
     public function hide()
     {
@@ -231,7 +208,7 @@ class NewsController extends ControllerFactory
             return r_result(0);
         }
     }
-    //设置是否推荐
+    //设置是否草稿
     public function isDraft()
     {
         $id = $this->Request->post('id');
